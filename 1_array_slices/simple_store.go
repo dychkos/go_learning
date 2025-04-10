@@ -6,8 +6,8 @@ import (
 )
 
 type Product struct {
-	Name string
-	Price float64
+	Name     string
+	Price    float64
 	Quantity int
 }
 
@@ -17,7 +17,7 @@ var products []Product = []Product{
 	{Name: "Apple Watch SE", Price: 12.890, Quantity: 1000},
 }
 
-func (p Product) toString () string {
+func (p Product) toString() string {
 	return fmt.Sprintf("Name: %s , Price %.2f, Count: %d\n", p.Name, p.Price, p.Quantity)
 }
 
@@ -25,13 +25,18 @@ func main() {
 	var search string
 
 	for true {
-		fmt.Println("Enter product for search:");
+		fmt.Println("Enter product for search:")
 
 		fmt.Scanf("%s", &search)
-	
+
+		if search == "." {
+			fmt.Println("Goodbye.")
+			break
+		}
+
 		foundProduct := getProductByName(search)
-	
-		if (foundProduct == nil) {
+
+		if foundProduct == nil {
 			fmt.Println("Product not found")
 		} else {
 			fmt.Println(foundProduct.toString())
@@ -39,7 +44,7 @@ func main() {
 
 		fmt.Println("---------")
 	}
-	
+
 }
 
 func getProductByName(productName string) *Product {
